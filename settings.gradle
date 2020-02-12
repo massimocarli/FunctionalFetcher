@@ -1,0 +1,5 @@
+rootProject.name = 'FunctionalFecther'
+include("arrow")
+include("arrow:data-types")
+include("arrow:typeclasses")
+include("custom")
