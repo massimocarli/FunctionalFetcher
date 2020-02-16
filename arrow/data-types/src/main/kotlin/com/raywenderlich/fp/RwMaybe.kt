@@ -17,3 +17,4 @@ fun <A, B> RwMaybe<A>.ap(fn: RwMaybe<(A) -> B>): RwMaybe<B> =
   if (this is RwNone || fn is RwNone) RwNone
   else RwSome((fn as RwSome<(A) -> B>).value((this as RwSome<A>).value))
 
+infix fun <A, B> RwMaybe<(A) -> B>.appl(a: RwMaybe<A>) = a.ap(this)
