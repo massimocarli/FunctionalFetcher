@@ -18,11 +18,13 @@ fun <E, A, B> Result<E, A>.map(fn: (A) -> B): Result<E, B> = when (this) {
   is Error<E> -> this
 }
 
-fun <E, A, B> Result<E, A>.ap(fn: Result<E, (A) -> B>): Result<E, B> =
-  when {
-    this is Success<A> && fn is Success<(A) -> B> -> Success(fn.a(this.a))
-    else -> Error((this as Error<E>).e)
+fun <A, B, E> Result<E, A>.ap(f: Result<E, (A) -> B>): Result<E, B> = when {
+  this is Success<A> && f is Success<(A) -> B> -> Success((f.a)(this.a))
+  else -> when {
+    this is Error -> this
+    else -> Error((f as Error<E>).e)
   }
+}
 
 
 fun main() {
