@@ -18,15 +18,14 @@ fun <E, A, B> Result<E, A>.map(fn: (A) -> B): Result<E, B> = when (this) {
   is Error<E> -> this
 }
 
-fun <A, B, E> Result<E, A>.ap(f: Result<E, (A) -> B>): Result<E, B> = when {
-  this is Success<A> && f is Success<(A) -> B> -> Success((f.a)(this.a))
-  else -> when {
-    this is Error -> this
-    else -> Error((f as Error<E>).e)
-  }
+// The Result as Applicative
+infix fun <E, A, B> Result<E, A>.ap(fn: Result<E, (A) -> B>): Result<E, B> = when {
+  this is Error<E> -> this
+  fn is Error<E> -> Error(fn.e)
+  else -> Success((fn as Success<(A) -> B>).a((this as Success<A>).a))
 }
 
+// Better syntax
+infix fun <E, A, B> Result<E, (A) -> B>.appl(a: Result<E, A>) = a.ap(this)
 
-fun main() {
 
-}

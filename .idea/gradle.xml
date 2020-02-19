@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/arrow" />
             <option value="$PROJECT_DIR$/arrow/data-types" />
             <option value="$PROJECT_DIR$/arrow/typeclasses" />
-            <option value="$PROJECT_DIR$/custom" />
           </set>
         </option>
         <option name="useAutoImport" value="true" />
