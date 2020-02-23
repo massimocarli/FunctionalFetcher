@@ -60,5 +60,5 @@ fun main() {
   }
   val appParse = Result.just(::parseTasks)
   val appDump = Result.just(::dump)
-  //val a = (::parseTasks appl FunctionalFetcherResult.fetch(ok_url))
+  //val a = (FunctionalFetcherResult.fetch(ok_url).ap(::parseTasks))
 }
