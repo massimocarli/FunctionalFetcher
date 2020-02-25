@@ -10,3 +10,6 @@ fun <E, T, R> Result<E, T>.ap(fn: Result<E, (T) -> R>): Result<E, R> = when (fn)
     is Error<E> -> Error(this.e)
   }
 }
+
+// Better syntax
+infix fun <E, A, B> Result<E, (A) -> B>.appl(a: Result<E, A>) = a.ap(this)

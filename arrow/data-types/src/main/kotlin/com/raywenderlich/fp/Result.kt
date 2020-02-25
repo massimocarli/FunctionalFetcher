@@ -24,8 +24,6 @@ fun <E, A, B> Result<E, A>.ap(fn: Result<E, (A) -> B>): Result<E, B> = when {
   fn is Error<E> -> Error(fn.e)
   else -> Success((fn as Success<(A) -> B>).a((this as Success<A>).a))
 }
-
-// Better syntax
-infix fun <E, A, B> Result<E, (A) -> B>.appl(a: Result<E, A>) = a.ap(this)
 */
+
 

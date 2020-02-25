@@ -66,5 +66,5 @@ fun main() {
   val printString = { str: String -> print(str) }
   // 3
   FunctionalFetcher.fetch(error_url)
-    .map(printErrorFun, printString)
+    .bimap(printErrorFun, printString)
 }
