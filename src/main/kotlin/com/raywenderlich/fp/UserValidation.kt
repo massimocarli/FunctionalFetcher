@@ -9,7 +9,7 @@ fun validateName(name: String): Result<Exception, String> =
 
 // 3
 fun validateEmail(email: String): Result<ValidationException, String> =
-  if (email.contains("@")) Success(email) else Error(ValidationException("Imvalid email"))
+  if (email.contains("@")) Success(email) else Error(ValidationException("Invalid email"))
 
 
 //fun main() {
