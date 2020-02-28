@@ -32,11 +32,11 @@ typealias UserBuilder = (Int) -> (String) -> (String) -> User
 fun main() {
   val idVal = justResult(1)
   val nameVal = justResult("Max")
-  val missingNameVal = Error(IllegalStateException("Missing name!"))
+  val missingNameVal = Error(ValidationException("Missing name!"))
   val emailVal = justResult("max@maxcarli.it")
   val userApp = justResult(userBuilder)
   // 1
   (userApp appl idVal appl nameVal appl emailVal).mapRight { println(it) }
   // 2
-  (userApp appl idVal appl missingNameVal appl emailVal).mapLeft { println(it) }
+  //(userApp appl idVal appl missingNameVal appl emailVal).mapLeft { println(it) }
 }

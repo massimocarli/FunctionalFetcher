@@ -1,13 +1,14 @@
 package com.raywenderlich.fp
 
+// 1
 interface Semigroup<T> {
-  fun T.plus(rh: T): T
+  operator fun plus(rh: T): T
 }
 
-class SgValidationException(val messages: Array<String>):Semigroup<SgValidationException> {
-
-override operator fun SgValidationException.plus(rh: SgValidationException) =
-  SgValidationException(this.messages + messages)
-
+// 2
+class SgValidationException(val messages: Array<String>) : Semigroup<SgValidationException> {
+  // 3
+  override operator fun plus(rh: SgValidationException) =
+    SgValidationException(this.messages + rh.messages)
 }
 

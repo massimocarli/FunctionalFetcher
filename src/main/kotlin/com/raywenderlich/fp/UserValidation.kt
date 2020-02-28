@@ -3,13 +3,22 @@ package com.raywenderlich.fp
 // 1
 class ValidationException(msg: String) : Exception(msg)
 
-// 2
-fun validateName(name: String): Result<Exception, String> =
-  if (name.length > 4) Success(name) else Error(ValidationException("Invalid Name"))
+//// 2
+//fun validateName(name: String): Result<Exception, String> =
+//  if (name.length > 4) Success(name) else Error(ValidationException("Invalid Name"))
+//
+//// 3
+//fun validateEmail(email: String): Result<ValidationException, String> =
+//  if (email.contains("@")) Success(email) else Error(ValidationException("Invalid email"))
+
+fun validateName(name: String): Result<SgValidationException, String> =
+  if (name.length > 4) Success(name)
+  else Error(SgValidationException(arrayOf("Invalid Name")))
 
 // 3
-fun validateEmail(email: String): Result<ValidationException, String> =
-  if (email.contains("@")) Success(email) else Error(ValidationException("Invalid email"))
+fun validateEmail(email: String): Result<SgValidationException, String> =
+  if (email.contains("@")) Success(email)
+  else Error(SgValidationException(arrayOf("Invalid email")))
 
 
 //fun main() {
@@ -39,9 +48,11 @@ fun main() {
 
   val userApp = justResult(userBuilder)
 
-  val validatedUser = userApp appl idVal appl validateName("Massimo") appl validateEmail("max@maxcarli.it")
+  val validatedUser = userApp appl idVal appl validateName("Max") appl validateEmail("maxcarli.it")
   validatedUser.bimap({
-    println("Error: $it")
+    it.messages.forEach {
+      println("Error: $it")
+    }
   }, {
     println("Validated user: $it")
   })
